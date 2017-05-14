@@ -1,0 +1,6 @@
+"0","#Remove links from tweets"
+"0","pop_tidy <- pop "
+"0","pop_tidy$text <- gsub('http.*\\s*', '', pop_tidy$text)"
+"0","pop_tidy <- pop_tidy %>% unnest_tokens(word,text) %>% anti_join(stop_words, by=""word"") %>% count(word,sort=TRUE)"
+"0","names(pop_tidy) <- c(""Word"",""Tally"")"
+"0","head(pop_tidy,10)"

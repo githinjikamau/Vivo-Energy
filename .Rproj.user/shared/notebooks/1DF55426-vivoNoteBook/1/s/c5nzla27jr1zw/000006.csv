@@ -1,0 +1,3 @@
+"0","pop2 <- pop %>% arrange(desc(favorite_count),desc(retweet_count))"
+"0","names(pop2) <- c(""Text"", ""Favorite Count"",""Retweet Count"")"
+"0","head(pop2,10)"

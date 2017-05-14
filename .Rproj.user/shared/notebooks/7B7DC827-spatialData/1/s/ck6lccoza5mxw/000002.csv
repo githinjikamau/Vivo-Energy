@@ -1,0 +1,4 @@
+"0","```r
+tm_shape(ken_const) +
+  tm_borders()
+```"

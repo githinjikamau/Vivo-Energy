@@ -1,0 +1,7 @@
+"0","```r
+#Obtain dataframe containing sentiments
+bing <- get_sentiments(lexicon = \"bing\")
+emotion <- speech.m %>% inner_join(bing,by=c(\"words\"=\"word\"))
+emotion.p <- emotion %>% filter(sentiment==\"positive\")
+wordcloud(emotion.p$words,emotion.p$freq, colors = brewer.pal(6,\"Dark2\"),max.words = 100, rot.per = 0.25, min.freq = 1)
+```"

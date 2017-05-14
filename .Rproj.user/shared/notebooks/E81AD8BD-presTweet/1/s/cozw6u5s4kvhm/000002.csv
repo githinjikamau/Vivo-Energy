@@ -1,0 +1,4 @@
+"0","```r
+set.seed(1234)
+wordcloud(Htags$Hashtags,Htags$Tally,max.words = 100,min.freq = 1,colors = brewer.pal(6,\"Dark2\"),rot.per = 0.25)
+```"

@@ -1,0 +1,15 @@
+"0","```r
+#Webscrape speech 
+url<- \"http://www.president.go.ke/2017/03/19/speech-by-his-excellency-hon-uhuru-kenyatta-c-g-h-president-of-the-republic-of-kenya-and-commander-in-chief-of-the-defence-forces-during-the-2017-state-of-the-nation-address-parliament-buildings/\"
+
+pres.sp<-read_html(url) %>% html_nodes(\"b,p\") %>% html_text()
+
+# concatenate into single string 
+pres.sp.c<- paste0(pres.sp[1:384],collapse = \"\")
+
+#read into corpus 
+speech<- VCorpus(VectorSource(pres.sp.c))
+
+#inspect
+inspect(speech)
+```"

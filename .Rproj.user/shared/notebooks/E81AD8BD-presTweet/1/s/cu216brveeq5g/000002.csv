@@ -1,0 +1,13 @@
+"0","```r
+ggplot(pop) +
+  geom_histogram(aes(favorite_count),binwidth=15,fill=\"mediumslateblue\",alpha=0.6,colour=\"slategrey\") +
+  geom_histogram(aes(retweet_count),binwidth=15,fill=\"firebrick3\",alpha=0.6,colour=\"slategrey\") +
+  coord_cartesian(xlim = c(0,750)) +
+  labs(x=NULL,y=\"Count\",title=\"Distribution of Metrics\") +
+  theme_minimal() +
+  annotate(\"text\",x=180,y=365,label=\"Favorite Count\",colour=\"firebrick3\") +
+  annotate(\"text\",x=280,y=165,label=\"Retweet Count\",colour=\"mediumslateblue\") +
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()
+  )
+```"

@@ -1,0 +1,7 @@
+"0","```r
+#Plot of word frequencies
+ggplot(sp.m[sp.m$freq>20,] , aes(x=freq,y=words)  ) +
+  geom_lollipop(horizontal=T,size=1, point.colour = \"blue\") +
+  labs(y=NULL, x=\"Frequency\") +
+  theme_minimal()
+```"

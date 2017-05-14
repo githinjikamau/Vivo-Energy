@@ -1,0 +1,44 @@
+"0","```r
+pack <- c(\"rgdal\",\"ggmap\",\"tmap\",\"maptools\",\"rgeos\",\"RColorBrewer\",\"viridis\")
+pload <- function(x){
+  for( i in x ){
+    #  require returns TRUE invisibly if it was able to load package
+    if( ! require( i , character.only = TRUE ) ){
+      #  If package was not able to be loaded then re-install
+      install.packages( i , dependencies = TRUE )
+  }
+      #  Load package after installing
+      require( i , character.only = TRUE )
+    
+  }
+}
+pload(pack)
+```"
+"1","Loading required package: rgdal
+Loading required package: sp
+rgdal: version: 1.2-6, (SVN revision 651)
+ Geospatial Data Abstraction Library extensions to R successfully loaded
+ Loaded GDAL runtime: GDAL 2.0.1, released 2015/09/15
+ Path to GDAL shared files: C:/Users/Brian/Documents/R/win-library/3.3/rgdal/gdal
+ Loaded PROJ.4 runtime: Rel. 4.9.2, 08 September 2015, [PJ_VERSION: 492]
+ Path to PROJ.4 shared files: C:/Users/Brian/Documents/R/win-library/3.3/rgdal/proj
+ Linking to sp version: 1.2-4 
+Loading required package: ggmap
+Loading required package: ggplot2
+Want to understand how all the pieces fit together? Buy the ggplot2
+book: http://ggplot2.org/book/
+Google Maps API Terms of Service: http://developers.google.com/maps/terms.
+Please cite ggmap if you use it: see citation('ggmap') for details.
+Loading required package: tmap
+Loading required package: maptools
+Checking rgeos availability: TRUE
+Loading required package: rgeos
+rgeos version: 0.3-23, (SVN revision 546)
+ GEOS runtime version: 3.5.0-CAPI-1.9.0 r4084 
+ Linking to sp version: 1.2-4 
+ Polygon checking: TRUE 
+
+Loading required package: RColorBrewer
+Loading required package: viridis
+Loading required package: viridisLite
+"

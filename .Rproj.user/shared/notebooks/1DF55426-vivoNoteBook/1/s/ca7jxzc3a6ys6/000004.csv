@@ -1,0 +1,8 @@
+"0","# checking if i can obtain a better wordcloud using wordcloud2"
+"0"," library(wordcloud2)"
+"0","options(stringsAsFactors = F)"
+"0","Htags2 <- Htags"
+"0","Htags2$Tally <- log(Htags$Tally) "
+"0","colnames(Htags2) <- c(""word"",""freq"")"
+"0","wordcloud2(data = Htags2, size = 0.4 )"
+"2","the condition has length > 1 and only the first element will be used"

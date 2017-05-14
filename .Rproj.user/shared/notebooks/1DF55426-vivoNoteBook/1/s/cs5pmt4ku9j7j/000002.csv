@@ -1,0 +1,6 @@
+"0","afinn <- get_sentiments(lexicon = ""afinn"")"
+"0","pop_tidy.s <- vivo.tw"
+"0","pop_tidy.s$text <- gsub('http.*\\s*', '', pop_tidy.s$text)"
+"0","pop_tidy.s <- pop_tidy.s %>% filter(!is_retweet==TRUE) %>% select(text,33:35) %>% unnest_tokens(word,text) %>% "
+"0","  inner_join(afinn, by =c(""word""=""word""))"
+"0","rm(afinn)"

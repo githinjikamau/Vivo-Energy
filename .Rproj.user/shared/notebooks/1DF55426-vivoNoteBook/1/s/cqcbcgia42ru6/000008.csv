@@ -1,0 +1,6 @@
+"0","x <- pop_tidy.s %>% group_by(month,year) %>% summarise(total_score=sum(score))"
+"0","plotx<- ggplot(filter(x, year==2016), aes(x=month, y=total_score)) +"
+"0","  geom_bar(stat = ""identity"", width = 0.5) +"
+"0","  labs(x=NULL, y=""Total Score"", title=""Total Sentiment Score 2016"") +"
+"0","  theme_solarized()"
+"0","#rm(x)"

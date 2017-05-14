@@ -1,0 +1,5 @@
+"0","```r
+set.seed(143)
+wordcloud(speech.m$words,speech.m$freq, color = brewer.pal(6,\"Dark2\" ), max.words = 100,rot.per = 0.3,min.freq = 3 )
+
+```"

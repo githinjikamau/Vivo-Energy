@@ -1,0 +1,5 @@
+"0","```r
+hashtags <- presTw$hashtags %>% unique() 
+hashtags <- drop_na(hashtags %>% as.data.frame(stringsAsFactors=F))
+head(hashtags %>% as_tibble(),8)
+```"

@@ -1,0 +1,9 @@
+"0","```r
+ken_const <- readOGR(dsn = \"ke_gini_constituency\",layer = \"ke_gini_constituency\" )
+```"
+"1","OGR data source with driver: ESRI Shapefile 
+Source: \"ke_gini_constituency\", layer: \"ke_gini_constituency\"
+with 210 features
+It has 3 fields
+Integer64 fields read as strings:  CONST_CODE 
+"

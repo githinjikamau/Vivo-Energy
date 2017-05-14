@@ -1,0 +1,4 @@
+"0","```r
+emotion.n <- emotion %>% filter(sentiment==\"negative\")
+wordcloud(emotion.n$words, emotion.n$freq, colors = brewer.pal(6,\"Dark2\"),max.words = 100, min.freq = 1)
+```"

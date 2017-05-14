@@ -1,0 +1,10 @@
+"0","```r
+#====================== Transformations =================== #
+#using function tm_map
+#Eliminate extra white space
+speech<- tm_map(speech, stripWhitespace )
+speech<- tm_map(speech, removePunctuation)
+speech<- tm_map(speech, tolower )
+speech<- tm_map(speech, removeWords, stopwords(kind = \"en\") )
+speech<- tm_map(speech, PlainTextDocument )
+```"

@@ -1,0 +1,16 @@
+"0","```r
+ken <- readOGR(dsn = \"kenyan_counties\",layer = \"County\")
+```"
+"1","OGR data source with driver: ESRI Shapefile 
+Source: \"kenyan_counties\", layer: \"County\"
+with 47 features
+It has 8 fields
+"
+"0","```r
+plot(ken)
+metrop <- c(\"Kiambu\",\"Murang'a\",\"Machakos\",\"Kajiado\",\"Nairobi\")
+plot(ken[ken$COUNTY %in% metrop,], col=\"skyblue\",add = T)
+```"
+"0","```r
+title(main = \"Nairobi Metropolitan Area\")
+```"

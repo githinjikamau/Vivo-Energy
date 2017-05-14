@@ -1,0 +1,11 @@
+"0","```r
+pop1 <- gather(pop,metric,tally,2:3)
+ggplot(pop1 , aes(tally,colour= metric)) +
+  geom_freqpoly(binwidth=15, size=1) +
+  scale_fill_manual(values = c(\"blue\",\"red\")) +
+  coord_cartesian(xlim = c(0,750)) +
+  labs(x=NULL,y=\"Count\",colour=\"Metric\",title=\"Distribution of Metrics\") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank(),
+        legend.position = \"none\")
+```"

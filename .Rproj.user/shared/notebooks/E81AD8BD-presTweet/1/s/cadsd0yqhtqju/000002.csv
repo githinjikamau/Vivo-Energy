@@ -1,0 +1,4 @@
+"0","```r
+set.seed(1234)
+wordcloud(pop_tidy$Word, scale(pop_tidy$Tally, center = T, scale = T),max.words = 100, colors = brewer.pal(6,\"Dark2\"), min.freq = 3)
+```"

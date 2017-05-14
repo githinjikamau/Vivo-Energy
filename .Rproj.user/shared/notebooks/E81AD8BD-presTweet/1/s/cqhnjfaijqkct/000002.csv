@@ -1,0 +1,4 @@
+"0","presTweets <- get_timeline(\"UKenyatta\", n= 3000)
+presTweets <- janitor::remove_empty_cols(presTweets)
+write_csv(presTweets,\"presTweets.csv\")
+rm(presTweets)"

@@ -1,0 +1,16 @@
+"0","```r
+#=================== Convert to a TDM =====================#
+#basically simialr to a matrix 
+tdm<- TermDocumentMatrix(speech)
+inspect(tdm)
+#Convert to data frame. Make data tidy
+#But first one has convet to a matrix
+speech.m<- as.matrix(tdm)
+speech.m<- as.data.frame(speech.m)
+colnames(speech.m)<-\"freq\"
+speech.m<- rownames_to_column(speech.m, var = \"words\")
+
+#Ordering of data
+ord<-order(speech.m$freq, decreasing = T) 
+speech.m<- speech.m[ord,] 
+```"

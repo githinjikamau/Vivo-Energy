@@ -1,0 +1,5 @@
+"0","```r
+Htags <- unnest_tokens(presTw,tags,hashtags,token = \"words\") %>% filter(!is_retweet==TRUE) %>% select(tags) %>% drop_na() %>% count(tags, sort=T)
+colnames(Htags) <- c(\"Hashtags\",\"Tally\")
+head(Htags,8)
+```"

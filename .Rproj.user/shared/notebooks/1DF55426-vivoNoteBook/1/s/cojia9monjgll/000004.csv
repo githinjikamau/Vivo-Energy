@@ -1,0 +1,2 @@
+"0","set.seed(1234)"
+"0","wordcloud(Htags$Hashtags[1:60],(Htags$Tally)[1:60], scale = c(3,.4), max.words = 60,min.freq = 2,colors = brewer.pal(8,""Dark2""),rot.per = 0.25)"

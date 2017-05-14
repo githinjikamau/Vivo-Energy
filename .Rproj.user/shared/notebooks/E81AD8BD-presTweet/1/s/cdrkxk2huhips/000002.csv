@@ -1,0 +1,8 @@
+"0","```r
+pop <- presTw %>% filter(!is_retweet==TRUE) %>% select(text,favorite_count,retweet_count)
+ggplot(pop,aes(retweet_count,favorite_count)) +
+  geom_point(alpha=0.40) +
+  geom_smooth() +
+  labs(x=\"Retweet Count\",y=\"Favorite Count\") +
+  theme_minimal()
+```"

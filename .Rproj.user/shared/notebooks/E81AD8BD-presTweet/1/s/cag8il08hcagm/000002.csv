@@ -1,0 +1,5 @@
+"0","```r
+pack <- c(\"tidytext\",\"tidyverse\",\"rtweet\",\"curl\",\"wordcloud\",\"RColorBrewer\")
+suppressMessages(lapply(pack,library, character.only=T))
+rm(pack)
+```"

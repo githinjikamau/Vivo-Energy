@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1494406030265.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7E94B0E9",
+    "lastKnownWriteTime" : 8389754659302220320,
+    "last_content_update" : 1494406030265,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "70121406",
+        "caption" : "vivo.tw",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=vivo.tw&cache_key=70121406",
+        "displayedObservations" : 2993,
+        "environment" : "",
+        "object" : "vivo.tw",
+        "preview" : 0,
+        "totalObservations" : 2993,
+        "variables" : 36
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

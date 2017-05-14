@@ -1,0 +1,5 @@
+"0","```r
+pop2 <- pop %>% arrange(desc(favorite_count),desc(retweet_count))
+names(pop2) <- c(\"Text\", \"Favorite Count\",\"Retweet Count\")
+head(pop2,10)
+```"
