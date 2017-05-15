@@ -1,4 +1,4 @@
-"0","ggplot(vivo.wd, aes(x=wday, y=Tally) ) +"
+"0","a <- ggplot(vivo.wd, aes(x=wday, y=Tally) ) +"
 "0","  geom_bar(stat = ""identity"", width = 0.5) +"
 "0","  labs(x=NULL) +"
 "0","  theme_solarized() +"

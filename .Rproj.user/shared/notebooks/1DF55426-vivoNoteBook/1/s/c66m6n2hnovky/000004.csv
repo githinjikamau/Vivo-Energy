@@ -1,6 +1,0 @@
-"0","pop <- vivo.tw %>% filter(!is_retweet==TRUE) %>% select(text,favorite_count,retweet_count)"
-"0","ggplot(pop,aes(retweet_count,favorite_count)) +"
-"0","  geom_point(alpha=0.40) +"
-"0","  geom_smooth(method = ""lm"") +"
-"0","  labs(x=""Retweet Count"",y=""Favorite Count"") +"
-"0","  theme_solarized()"

@@ -1,1 +1,0 @@
-"0","vivo.tw %>% group_by(rounded_time) %>% summarise(median_f=median(favorite_count),median_rt=median(retweet_count))"

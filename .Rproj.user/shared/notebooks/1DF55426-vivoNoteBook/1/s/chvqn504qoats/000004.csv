@@ -1,3 +1,0 @@
-"0","Htags <- unnest_tokens(vivo.tw,output = tags,input = hashtags,token = ""words"") %>% filter(!is_retweet==TRUE) %>% select(tags) %>% drop_na() %>% count(tags, sort=T)"
-"0","colnames(Htags) <- c(""Hashtags"",""Tally"")"
-"0","head(Htags,8)"

@@ -1,2 +1,0 @@
-"0","# finding the values contained in a particular rounded hour"
-"0","#vivo.tw %>% filter(rounded_time==19) %>% select(favorite_count,retweet_count)"

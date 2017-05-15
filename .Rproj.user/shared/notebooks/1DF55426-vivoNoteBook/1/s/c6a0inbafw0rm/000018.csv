@@ -1,6 +1,0 @@
-"0","ggplot(data = vivo.tw, aes(x=rounded_time, y=favorite_count+1, group=rounded_time)) +"
-"0","  geom_boxplot() +"
-"0","  labs(x=NULL,y=NULL, title=""BoxPlot of Favourite Count per Hour"") +"
-"0","  scale_x_continuous(breaks=seq.int(2,20,2), labels = paste0(c(seq.int(2,12,2),c(seq.int(2,8,2))),rep(c(""am"",""noon"",""pm""), c(5,1,4) ) ) ) +"
-"0","  scale_y_continuous(trans = ""log"") +"
-"0","  theme_solarized()"

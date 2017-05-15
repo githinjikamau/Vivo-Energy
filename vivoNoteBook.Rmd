@@ -220,6 +220,7 @@ a <- ggplot(vivo.wd, aes(x=wday, y=Tally) ) +
 
 ```{r}
 ggplotly(a)
+rm(a)
 ```
 
 
@@ -243,6 +244,8 @@ b<- ggplot(data=vivo.tw, aes(rounded_time) ) +
 
 ```{r}
 ggplotly(b)
+# declutter workspace
+rm(b)
 ```
 
 Time of day key:  
@@ -261,13 +264,21 @@ vivo.tw %>% group_by(rounded_time) %>% summarise(median_f=median(favorite_count)
 ```
 
 ```{r boxFavCount}
-ggplot(data = vivo.tw, aes(x=rounded_time, y=favorite_count+1, group=rounded_time)) +
+c<- ggplot(data = vivo.tw, aes(x=rounded_time, y=favorite_count+1, group=rounded_time)) +
   geom_boxplot() +
   labs(x=NULL,y=NULL, title="BoxPlot of Favourite Count per Hour") +
   scale_x_continuous(breaks=seq.int(2,20,2), labels = paste0(c(seq.int(2,12,2),c(seq.int(2,8,2))),rep(c("am","noon","pm"), c(5,1,4) ) ) ) +
   scale_y_continuous(trans = "log") +
   theme_solarized()
+c
 ```
+
+```{r}
+# needs extra work to be made interactive
+# ggplotly(c)
+# rm(c)
+```
+
 
 ```{r BoxRtCount}
 ggplot(data = vivo.tw, aes(x=rounded_time, y=retweet_count+1, group=rounded_time)) +
@@ -328,12 +339,17 @@ As can be seen the total sentiment score is not a good indicator as its suscepti
 ```{r monthSent17}
 x <- pop_tidy.s %>% group_by(month,year) %>% summarise(total_score=sum(score))
 
-ggplot(filter(x, year==2017), aes(x=month, y=total_score)) +
+d<- ggplot(filter(x, year==2017), aes(x=month, y=total_score)) +
   geom_bar(stat = "identity", width = 0.6) +
   labs(x=NULL, y="Total Score",title="Total Sentiment Score 2017") +
   theme_solarized()
 rm(x)
 ```
+
+```{r}
+ggplotly(d)
+```
+
 As opposed to obtaining the sum of the sentiment scores. Because the sum is susceptible to scale. How about obtaining the median as a better representation of the actual sentiment during the period. In which case it would rank from 3 for the highest positive score to -3 for the highest negative score.  
 Or if not then use the sum just a means of a general look at sentiment.
 

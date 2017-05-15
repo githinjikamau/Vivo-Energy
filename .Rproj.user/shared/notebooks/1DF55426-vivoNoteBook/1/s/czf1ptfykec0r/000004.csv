@@ -1,2 +1,0 @@
-"0","vivo.wd <- vivo.tw %>% group_by(wday) %>% summarise(Tally = n())"
-"0","vivo.wd"
