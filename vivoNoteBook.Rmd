@@ -211,12 +211,17 @@ Distribution is multimodal i.e more than one peak. And can be said to be almost 
 Compare different themes and widths to see which is best. Try theme minimal.
 
 ```{r wdayBar}
-ggplot(vivo.wd, aes(x=wday, y=Tally) ) +
+a <- ggplot(vivo.wd, aes(x=wday, y=Tally) ) +
   geom_bar(stat = "identity", width = 0.5) +
   labs(x=NULL) +
   theme_solarized() +
   expand_limits(y=c(0,600))
 ```
+
+```{r}
+ggplotly(a)
+```
+
 
 ## At what time are most tweets posted?
 
@@ -229,11 +234,15 @@ vivo.tw$rounded_time <- vivo.tw$created_at %>% round_date("hour") %>% hour()
 
 ```{r timePlot}
 # frequency polygon
-ggplot(data=vivo.tw, aes(rounded_time) ) +
+b<- ggplot(data=vivo.tw, aes(rounded_time) ) +
   geom_bar(stat = "count") +
   theme_solarized() +
   scale_x_continuous(breaks=seq.int(2,20,2), labels = paste0(c(seq.int(2,12,2),c(seq.int(2,8,2))),rep(c("am","noon","pm"), c(5,1,4) ) ) ) +
   labs(x=NULL, y="Count")
+```
+
+```{r}
+ggplotly(b)
 ```
 
 Time of day key:  
