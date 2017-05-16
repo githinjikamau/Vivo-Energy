@@ -382,7 +382,7 @@ And find marginal and conditional probabilities.
 
 Add titles and subtitles to graphs. With the subtitle having a lighter shade than the title. 
 
-## Comparison with other oil marketers
+## Comparison with Other Oil Marketers
 ```{r followers}
 vivo_f <- get_followers("vivoenergykenya")
 kenkob_f <- get_followers("KenolKobil") 
@@ -402,9 +402,10 @@ n.123 <-semi_join(vivo_f,kenkob_f,"user_id") %>% semi_join(total_f,"user_id") %>
 
 ```{r VennDiag}
 grid.newpage()
-draw.triple.venn(nrow(vivo_f),nrow(kenkob_f),nrow(total_f),(n.12),(n.23),(n.13),(n.123),category = c("Vivo Energy","KenolKobil","Total Kenya"),lty = "blank",fill = c("lawngreen","mediumslateblue","firebrick3"), fontfamily = rep("Century Schoolbook",7), alpha = rep(0.6,3),cat.cex = rep(1.3,3) )
+draw.triple.venn(nrow(vivo_f),nrow(kenkob_f),nrow(total_f),(n.12),(n.23),(n.13),(n.123),category = c("Vivo Energy","KenolKobil","Total Kenya"),lty = "blank",fill = c("lawngreen","mediumslateblue","firebrick3"), fontfamily = rep("Century Schoolbook",7), alpha = rep(0.6,3),cat.cex = rep(1.28,3) )
 rm(n.12,n.23,n.13,n.123)
 ```
+
 
 
 
