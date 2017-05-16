@@ -1,6 +1,0 @@
-"0","# frequency polygon"
-"0","b<- ggplot(data=vivo.tw, aes(rounded_time) ) +"
-"0","  geom_bar(stat = ""count"") +"
-"0","  theme_solarized() +"
-"0","  scale_x_continuous(breaks=seq.int(2,20,2), labels = paste0(c(seq.int(2,12,2),c(seq.int(2,8,2))),rep(c(""am"",""noon"",""pm""), c(5,1,4) ) ) ) +"
-"0","  labs(x=NULL, y=""Count"")"

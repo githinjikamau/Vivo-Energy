@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = F, include = F)
 
 
 ```{r load libraries}
-pack <- c("rtweet","janitor","wordcloud","RColorBrewer","tidyverse","tidytext","gridExtra","wordcloud2","lubridate","ggthemes")
+pack <- c("rtweet","janitor","wordcloud","RColorBrewer","tidyverse","tidytext","gridExtra","wordcloud2","lubridate","ggthemes","plotly","extrafont","VennDiagram")
 
 pload <- function(x){
   for( i in x ){
@@ -94,7 +94,7 @@ rm(Htags2)
 ```
 
 
-```{r htagsCloud}
+```{r htagsCloud, eval=FALSE, include=FALSE}
 set.seed(1234)
 wordcloud(Htags$Hashtags[1:60],(Htags$Tally)[1:60], scale = c(3,.4), max.words = 60,min.freq = 2,colors = brewer.pal(8,"Dark2"),rot.per = 0.25)
 ```
@@ -106,12 +106,13 @@ Plotting a scatter plot and augmenting it with a best fit line it is clear there
 
 ```{r scatterPlot}
 pop <- vivo.tw %>% filter(!is_retweet==TRUE) %>% select(text,favorite_count,retweet_count)
-ggplot(pop,aes(retweet_count,favorite_count)) +
+ ggplot(pop,aes(retweet_count,favorite_count)) +
   geom_point(alpha=0.40) +
   geom_smooth(method = "lm") +
   labs(x="Retweet Count",y="Favorite Count") +
   theme_solarized()
 ```
+
 Methods for stat_smooth include: "lm", "glm", "gam", "loess", "rlm"  
 * gam - generalized additive models.  
 * loess - local pilynomial regression fitting.  
@@ -360,9 +361,9 @@ vivo.tw %>% group_by(source) %>% summarise(Tally=n())
 The most commonly used device to tweet is the twitter android app closely followed by the twitter web client which together account for more than half of all tweets. The presence of Periscope indicates that there have been a couple of live broadcasts.
 
 ```{r}
-vivo.tw$place_name %>% unique()
+vivo.tw %>% group_by(place_name) %>% summarise(Tally=n())
 ```
-
+No much can be drawn from the data on the post location. Most entries are missing location data.
 
 ## Other Questions
 
@@ -374,9 +375,44 @@ vivo.tw$place_name %>% unique()
     + If so, which is the most used emoji?
     + Are the sentiments in the emoji tweet positive or negative?
 * Geo-spatial analysis of the locations Vivo Energy tweets from.  
-
+* Users mentioned by the Vivo Energy handle.
 
 Make a bayesian analysis. i.e a table with links on one end and time of day on other. Perhaps think of better vaiables?
 And find marginal and conditional probabilities.  
 
 Add titles and subtitles to graphs. With the subtitle having a lighter shade than the title. 
+
+## Comparison with other oil marketers
+```{r followers}
+vivo_f <- get_followers("vivoenergykenya")
+kenkob_f <- get_followers("KenolKobil") 
+total_f <- get_followers("totalkenya")
+```
+Infographic
+Pie chart of market share.
+No of followers.
+Venn Diagram of followers.
+
+```{r VennDiagSetup}
+n.12<- semi_join(vivo_f,kenkob_f,"user_id") %>% nrow() 
+n.23 <- semi_join(kenkob_f,total_f,"user_id") %>% nrow()
+n.13 <- semi_join(vivo_f,total_f,"user_id") %>% nrow() 
+n.123 <-semi_join(vivo_f,kenkob_f,"user_id") %>% semi_join(total_f,"user_id") %>% nrow() 
+```
+
+```{r VennDiag}
+grid.newpage()
+draw.triple.venn(nrow(vivo_f),nrow(kenkob_f),nrow(total_f),(n.12),(n.23),(n.13),(n.123),category = c("Vivo Energy","KenolKobil","Total Kenya"),lty = "blank",fill = c("lawngreen","mediumslateblue","firebrick3"), fontfamily = rep("Century Schoolbook",7), alpha = rep(0.6,3),cat.cex = rep(1.3,3) )
+rm(n.12,n.23,n.13,n.123)
+```
+
+
+
+
+
+
+
+
+
+
+

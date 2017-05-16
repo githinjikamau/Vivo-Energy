@@ -1,4 +1,4 @@
-"0","pack <- c(""rtweet"",""janitor"",""wordcloud"",""RColorBrewer"",""tidyverse"",""tidytext"",""gridExtra"",""wordcloud2"",""lubridate"",""ggthemes"")"
+"0","pack <- c(""rtweet"",""janitor"",""wordcloud"",""RColorBrewer"",""tidyverse"",""tidytext"",""gridExtra"",""wordcloud2"",""lubridate"",""ggthemes"",""plotly"")"
 "0","pload <- function(x){"
 "0","  for( i in x ){"
 "0","    #  require returns TRUE invisibly if it was able to load package"
