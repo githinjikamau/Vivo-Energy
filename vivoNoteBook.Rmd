@@ -5,11 +5,9 @@ output: html_notebook
 
 In the following notebook i carry out an analysis of the [Vivo Energy](https://twitter.com/vivoenergykenya) twitter handle.    
  
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, include = F)
 ```
-
 
 ```{r load libraries}
 pack <- c("rtweet","janitor","wordcloud","RColorBrewer","tidyverse","tidytext","gridExtra","wordcloud2","lubridate","ggthemes","plotly","extrafont","VennDiagram")
@@ -32,11 +30,9 @@ pload <- function(x){
 # declutter workspace
 rm(pack, pload)
 ```
-
 Using the R package Rtweet to access twitter's API, i obtained 3000 of the Vivo handle's tweets and stored them in a csv file.  
 
 Tabulated below are the first 6 observations from the dataset.  
-
 ```{r get tweets, eval=FALSE}
 
 vivo<- get_timeline("vivoenergykenya", n= 3000)
@@ -48,7 +44,6 @@ readr::write_csv(vivo,"vivotweets.csv")
 rm(vivo)
 
 ```
-
 ```{r readInData}
 vivo.tw <- read_csv("vivotweets.csv",col_names = T)
 head(vivo.tw, 6)
@@ -57,7 +52,6 @@ head(vivo.tw, 6)
 ## What hashtags does the handle use?
 
 In the first part of this analysis i analyse the most common hashtags the account uses.  
-
 ```{r hashtags}
 hashtags <- vivo.tw$hashtags %>% unique() 
 hashtags <- drop_na(hashtags %>% as.data.frame(stringsAsFactors=F))
@@ -66,21 +60,20 @@ head(hashtags %>% as_tibble(),8)
 
 From the table above it is evident that some hashtags appear in more than one row. This is because of different formatting. Specifically, as seen in the table, the case matters. Not quite evident is that hashtags from retweets are included in the hashtags column. As my focus in this case is specifically on hashtags by the Vivo account retweet hashtags are excluded. Also some tweets contain several hashtags.
 To get a more accurate account of the hashtags further wrangling is needed.  
-
 ```{r}
 Htags <- unnest_tokens(vivo.tw,output = tags,input = hashtags,token = "words") %>% filter(!is_retweet==TRUE) %>% select(tags) %>% drop_na() %>% count(tags, sort=T)
 colnames(Htags) <- c("Hashtags","Tally")
 head(Htags,8)
 ```
 
-It is evident once again that some challenges remain. Particularly with regard to spelling. The oft confusing British vs American spelling quagmire. Case in point "fuellingkenya" vs "fueling Kenya". 
-```{r}
-knitr::include_graphics(path = "https://imgs.xkcd.com/comics/perl_problems.png")
+It is evident once again that some challenges remain. Particularly with regard to spelling. The oft confusing British vs American spelling quagmire. Case in point "fuellingkenya" vs "fuelingkenya". One may use regular expressions to try and solve this problem but that often leads to other complications.
+```{r eval=FALSE}
+<img src="https://imgs.xkcd.com/comics/perl_problems.png"><br>
 ```
+
 Comment about the hashtags. Say the largest one. Do they all relate to marketing campaigns?  
 As would be expected most of the hashtags relate to promotional campaigns with fuellingkenya leading by a healthy margin.  
 A better representation of the hashtags used by the Vivo account would be a wordcloud. This is implemented below.  
-
 ```{r htags2Cloud}
 # checking if i can obtain a better wordcloud using wordcloud2
  library(wordcloud2)
@@ -93,7 +86,6 @@ wordcloud2(data = Htags2, size = 0.4 )
 rm(Htags2)
 ```
 
-
 ```{r htagsCloud, eval=FALSE, include=FALSE}
 set.seed(1234)
 wordcloud(Htags$Hashtags[1:60],(Htags$Tally)[1:60], scale = c(3,.4), max.words = 60,min.freq = 2,colors = brewer.pal(8,"Dark2"),rot.per = 0.25)
@@ -103,7 +95,6 @@ wordcloud(Htags$Hashtags[1:60],(Htags$Tally)[1:60], scale = c(3,.4), max.words =
 
 To answer this, I shall use two metrics; the favourite count and the retweet count.
 Plotting a scatter plot and augmenting it with a best fit line it is clear there exists a strong correlation between the two metrics.
-
 ```{r scatterPlot}
 pop <- vivo.tw %>% filter(!is_retweet==TRUE) %>% select(text,favorite_count,retweet_count)
  ggplot(pop,aes(retweet_count,favorite_count)) +
@@ -113,12 +104,7 @@ pop <- vivo.tw %>% filter(!is_retweet==TRUE) %>% select(text,favorite_count,retw
   theme_solarized()
 ```
 
-Methods for stat_smooth include: "lm", "glm", "gam", "loess", "rlm"  
-* gam - generalized additive models.  
-* loess - local pilynomial regression fitting.  
-
 Next i take a look at the distribution of both the retweet count and the favorite count using a histogram and a frequency polygon.  
-
 ```{r freqPoly}
 pop1 <- gather(pop,metric,tally,2:3)
 
@@ -163,7 +149,6 @@ rm(plot1,plot2)
  Comment about distribution. Looks Chi-Squared? check. Or perhaps reverse exponential.  
 The distribution of both metrics seems to resemble a chi-squared distrubution.   
 The distribution of both metrics is skewed right i.e they have long tails to the right. Plot boxplot to obtain the median, first and third quartiles as well as outliers.  
-
 ```{r metricTable}
 pop2 <- pop %>% arrange(desc(favorite_count),desc(retweet_count))
 names(pop2) <- c("Text", "Favorite Count","Retweet Count")
@@ -172,7 +157,6 @@ rm(pop2)
 ```
 The most popular tweets regard the shell fuel save challenge, comprising 5/10 of the top ten tweets. The mantle however, is taken by a tweet regarding coffee. Kenyans seem to really like their coffee especially on cold mornings.
 
- 
 ### What are the most popular words used by the handle?
 
 ```{r popular words }
@@ -183,9 +167,7 @@ pop_tidy <- pop_tidy %>% unnest_tokens(word,text) %>% anti_join(stop_words, by="
 names(pop_tidy) <- c("Word","Tally")
 head(pop_tidy,10)
 ```
-
 Not surprisingly the most common word used by the Vivo Energy twitter handle is "shell". Unfortunately, i do not have access to a list of Kiswahili stop words. This would have resulted in the elimination of connectors like na which do not contain any meaningful information for analysis.   
-~~what is amp?~~
 
 ### What percentage of tweets contain links?
 
@@ -196,13 +178,11 @@ Not surprisingly the most common word used by the Vivo Energy twitter handle is 
 
 ## Date of Postings
 
-
 ```{r}
 vivo.tw <- vivo.tw %>% mutate(wday = wday(created_at, label=T),
                               month = month(created_at, label=T),
                               year = year(created_at) )
 ```
-
 ```{r}
 vivo.wd <- vivo.tw %>% group_by(wday) %>% summarise(Tally = n())
 vivo.wd
@@ -210,7 +190,6 @@ vivo.wd
 
 Distribution is multimodal i.e more than one peak. And can be said to be almost uniform. There tends not to be a large disparity between the tweets posted on different days.
 Compare different themes and widths to see which is best. Try theme minimal.
-
 ```{r wdayBar}
 a <- ggplot(vivo.wd, aes(x=wday, y=Tally) ) +
   geom_bar(stat = "identity", width = 0.5) +
@@ -228,7 +207,6 @@ rm(a)
 ## At what time are most tweets posted?
 
 The Vivo Energy twitter handle is most active in the middle of the day, particularly from 7am to 3pm, ~~a la normal working hours~~. As can be seen in the graph below.
-
 ```{r}
 # round off the dates to the nearest hour
 vivo.tw$rounded_time <- vivo.tw$created_at %>% round_date("hour") %>% hour()
@@ -248,14 +226,6 @@ ggplotly(b)
 # declutter workspace
 rm(b)
 ```
-
-Time of day key:  
-
-* morning 5am to 12pm  
-* afternoon 12pm to 5pm  
-* Evening 5pm to 9pm  
-* Night 9pm to 4am  
-
 ### Does the time of posting affect how many likes and retweets?
 
 ```{r}
@@ -280,7 +250,6 @@ c
 # rm(c)
 ```
 
-
 ```{r BoxRtCount}
 ggplot(data = vivo.tw, aes(x=rounded_time, y=retweet_count+1, group=rounded_time)) +
   geom_boxplot() +
@@ -298,7 +267,6 @@ To quash any lingering doubt or to more formally test this assumption i run a li
 ## Sentiment Analysis
 
 For the sentiment analysis i shall use the AFINN dictionary which scores sentiments, ranking them from 3 to -3 indicating the degree of positiveness or negative sentiment where positive values represent positive sentiments and negative values represent negative sentiments.     
-How to classify sentiments? weekly? monthly? yearly?  
 ```{r getSentiments}
 afinn <- get_sentiments(lexicon = "afinn")
 
@@ -308,7 +276,6 @@ pop_tidy.s <- pop_tidy.s %>% filter(!is_retweet==TRUE) %>% select(text,33:35) %>
   inner_join(afinn, by =c("word"="word"))
 rm(afinn)
 ```
-
 
 ```{r monthSent16}
 x <- pop_tidy.s %>% group_by(month,year) %>% summarise(total_score=sum(score))
@@ -320,9 +287,9 @@ plotx<- ggplot(filter(x, year==2016), aes(x=month, y=total_score)) +
 #rm(x)
 ```
 Overall for the year 2016 the sentiments are positive, with February and December having especially positive sentiments.  
-Not very intuitive. Better a wordcloud with negative sentiment words?  
+Not very intuitive. Better a wordcloud with negative sentiment words?    
 
-Compare to number of tweets in each month.
+Compare to number of tweets in each month.  
 ```{r}
 # Count of tweets with sentiments in each month
 y <- pop_tidy.s %>% filter(year==2016) %>% group_by(month) %>% summarise(Tally=n())
@@ -336,7 +303,6 @@ ploty<- ggplot(data = y, aes(x=month,y=Tally)) +
 grid.arrange(plotx,ploty)
 ```
 As can be seen the total sentiment score is not a good indicator as its susceptible to scale i.e The total sentiment score closely resembles the total tweets per month. For a better indicator i turn to the median sentiment as the mean as a measure is susceptible to outliers.  
-
 ```{r monthSent17}
 x <- pop_tidy.s %>% group_by(month,year) %>% summarise(total_score=sum(score))
 
@@ -359,28 +325,10 @@ Or if not then use the sum just a means of a general look at sentiment.
 vivo.tw %>% group_by(source) %>% summarise(Tally=n())
 ```
 The most commonly used device to tweet is the twitter android app closely followed by the twitter web client which together account for more than half of all tweets. The presence of Periscope indicates that there have been a couple of live broadcasts.
-
 ```{r}
 vivo.tw %>% group_by(place_name) %>% summarise(Tally=n())
 ```
 No much can be drawn from the data on the post location. Most entries are missing location data.
-
-## Other Questions
-
-* Device used by the handle to tweet.
-    + Does it have any impact on sentiment of the tweet?
-* When(time) does the handle tweet?
-* Linear regression of fav count and retweet count.
-* Does the handle use emoji?
-    + If so, which is the most used emoji?
-    + Are the sentiments in the emoji tweet positive or negative?
-* Geo-spatial analysis of the locations Vivo Energy tweets from.  
-* Users mentioned by the Vivo Energy handle.
-
-Make a bayesian analysis. i.e a table with links on one end and time of day on other. Perhaps think of better vaiables?
-And find marginal and conditional probabilities.  
-
-Add titles and subtitles to graphs. With the subtitle having a lighter shade than the title. 
 
 ## Comparison with Other Oil Marketers
 ```{r followers}
@@ -388,10 +336,9 @@ vivo_f <- get_followers("vivoenergykenya")
 kenkob_f <- get_followers("KenolKobil") 
 total_f <- get_followers("totalkenya")
 ```
-Infographic
-Pie chart of market share.
-No of followers.
-Venn Diagram of followers.
+  
+To have a look into how followers are distributed amongst the three largest oil marketers I plot a Venn diagram. From the Venn diagram one can see that Total Kenya has the largest number of followers eclipsing the other two large oil marketers. I hypothesize that the large lead over Vivo Energy that Total Kenya has is attributable to the relatively late entry of Vivo Evergy into the downstream oil and gas business after taking over operations of Royal Dutch Shell. A better metric to compare the oil marketers would be the rate of growth in followers over time. However, data constraints prevent this.  
+All three oil marketers share 788 followers with Vivo Energy and Total Kenya sharing a relatively large number of followers at 2827. Vivo Energy and KenolKobil have a relatively small overlap of followers at 109.    
 
 ```{r VennDiagSetup}
 n.12<- semi_join(vivo_f,kenkob_f,"user_id") %>% nrow() 
