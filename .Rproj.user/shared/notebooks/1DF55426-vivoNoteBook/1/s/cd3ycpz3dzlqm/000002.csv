@@ -1,2 +1,0 @@
-"0","# round off the dates to the nearest hour"
-"0","vivo.tw$rounded_time <- vivo.tw$created_at %>% round_date(""hour"") %>% hour()"

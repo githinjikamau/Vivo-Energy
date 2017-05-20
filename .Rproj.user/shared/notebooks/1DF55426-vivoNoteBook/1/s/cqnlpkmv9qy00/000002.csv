@@ -1,3 +1,0 @@
-"0","vivo.tw <- vivo.tw %>% mutate(wday = wday(created_at, label=T),"
-"0","                              month = month(created_at, label=T),"
-"0","                              year = year(created_at) )"

@@ -1,6 +1,0 @@
-"0","# Count of tweets with sentiments in each month"
-"0","y <- pop_tidy.s %>% filter(year==2016) %>% group_by(month) %>% summarise(Tally=n())"
-"0","ploty<- ggplot(data = y, aes(x=month,y=Tally)) +"
-"0","  geom_bar(stat = ""identity"", width = 0.5) +"
-"0","  theme_solarized() +"
-"0","  labs(x=NULL, title=""Total Tweets Per Month in 2016"")"
